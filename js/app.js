@@ -31,3 +31,27 @@ console.log(catalogoSimple);
 const productosStockBajo = productos.filter(producto => producto.stock <= 5).map(producto => producto.nombre);
 console.log("Misión 2. Productos con stock bajo");
 console.log(productosStockBajo);
+
+// MISION 3 - valor total inventario
+
+const valorTotalInventario = productos.reduce(
+    (acc, {precio, stock}) => acc + (precio * stock), 0);
+console.log("Misión 3. Valor total del inventario");
+console.log(`$${valorTotalInventario}`);
+
+// MISION 4 - cuánto facturó cada pedido - cliente
+
+const pedidosTotal = pedidos.map(pedido => {
+    const totalPedido = pedido.items.reduce((acc, item) => {
+        const producto = productos.find(p => p.id === item.productoId);
+        return acc + (producto ? producto.precio * item.cantidad : 0);
+    }, 0);
+    return {
+        id: pedido.id,
+        cliente: pedido.cliente,
+        total: totalPedido
+    };
+});
+
+console.log("Misión 4. Total facturado por pedido");
+console.log(pedidosTotal);
