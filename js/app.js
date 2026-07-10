@@ -55,3 +55,45 @@ const pedidosTotal = pedidos.map(pedido => {
 
 console.log("Misión 4. Total facturado por pedido");
 console.log(pedidosTotal);
+
+// MISION 5 - el mejor cliente y el resumen del mes
+
+const facturaTotalMes = pedidosTotal.reduce((acc, p) => acc + p.total, 0);
+const totalNumPedidos = pedidosTotal.length;
+
+const compraPorCliente = pedidosTotal.reduce((acc, {cliente, total}) => {
+    acc[cliente] = (acc[cliente] || 0) + total;
+    return acc;
+}, {});
+
+const mejorCliente = Object.entries(compraPorCliente).reduce((max, [cliente, total]) => {
+    return total > max.total ? { cliente, total } : max;
+}, { cliente: null, total: 0 });
+
+const resumenMes = {
+    facturacionTotal: facturaTotalMes,
+    totalPedidos: totalNumPedidos,
+    compraPorCliente,
+    mejorCliente
+};
+
+console.log("Misión 5. Resumen del mes");
+console.log(resumenMes);
+
+//MISION 6 - Datos reales desde una API (async/await)
+
+const traerClientes = async () => {
+    const url = "";
+    try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/users');
+        const usuarios = await res.json();
+        return usuarios.map(({ name, email }) => ({ nombre: name, correo: email }));
+    } catch (error) {
+        console.error('Error al traer clientes:', error);
+    }
+}
+
+console.log("Misión 6. Datos de clientes desde API");
+traerClientes().then(clientes => {
+    console.log(clientes);
+});
