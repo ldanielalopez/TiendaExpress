@@ -1,0 +1,33 @@
+// DATOS DEL TALLER - CASO PROBLEMA
+
+// Inventario de productos
+const productos = [
+    { id: 1, nombre: "Café", categoria: "bebidas", precio: 12000, stock: 8 },
+    { id: 2, nombre: "Arroz", categoria: "granos", precio: 4500, stock: 3 },
+    { id: 3, nombre: "Jabón", categoria: "aseo", precio: 3500, stock: 25 },
+    { id: 4, nombre: "Leche", categoria: "bebidas", precio: 4000, stock: 2 },
+    { id: 5, nombre: "Lentejas", categoria: "granos", precio: 5000, stock: 15 },
+    { id: 6, nombre: "Shampoo", categoria: "aseo", precio: 9500, stock: 12 },
+    { id: 7, nombre: "Té", categoria: "bebidas", precio: 8000, stock: 1 }
+];
+
+// Pedidos del mes
+const pedidos = [
+    { id: 101, cliente: "Ana", items: [{ productoId: 1, cantidad: 2 }, { productoId: 3, cantidad: 1 }] },
+    { id: 102, cliente: "Luis", items: [{ productoId: 2, cantidad: 5 }] },
+    { id: 103, cliente: "Ana", items: [{ productoId: 4, cantidad: 3 }, { productoId: 7, cantidad: 1 }] },
+    { id: 104, cliente: "Marta", items: [{ productoId: 1, cantidad: 1 }] },
+    { id: 105, cliente: "Luis", items: [{ productoId: 5, cantidad: 4 }, { productoId: 6, cantidad: 1 }] }
+];
+
+// MISION 1 - catalogo simple
+
+const catalogoSimple = productos.map(({ nombre, precio}) => ({nombre, precio}));
+console.log("Misión 1. Lista de productos");
+console.log(catalogoSimple);
+
+// MISION 2 - alerta de inventario bajo
+
+const productosStockBajo = productos.filter(producto => producto.stock <= 5).map(producto => producto.nombre);
+console.log("Misión 2. Productos con stock bajo");
+console.log(productosStockBajo);
